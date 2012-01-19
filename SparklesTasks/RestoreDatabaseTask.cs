@@ -21,7 +21,7 @@ namespace SparklesTasks
 		[TaskAttribute("backup-path", Required = true)]
 		public string BackupPath { get; set; }
 
-		private string serverName = @"localhost\sql2008";
+		private string serverName = @"localhost";
 		[TaskAttribute("server")]
 		public string ServerName { get { return serverName; } set { serverName = value; } }
 
@@ -51,7 +51,7 @@ namespace SparklesTasks
 			restore.RelocateFiles.Add(new RelocateFile(table.Rows[0][0].ToString(), Path.Combine(server.Settings.DefaultFile, DBName + ".mdf")));
 			restore.RelocateFiles.Add(new RelocateFile(table.Rows[1][0].ToString(), Path.Combine(server.Settings.DefaultFile, DBName + "_Log.ldf")));
 
-			restore.PercentComplete += UpdatePercentComplete;
+			restore.PercentComplete += UpdatePercent;
 			restore.Complete += RestoreCompleted;
 
 			restore.SqlRestore(server);
@@ -60,9 +60,9 @@ namespace SparklesTasks
 				server.ConnectionContext.Disconnect();
 		}
 
-		protected void UpdatePercentComplete(object sender, PercentCompleteEventArgs percentCompleteEventArgs)
+		private void UpdatePercent(object sender, PercentCompleteEventArgs e)
 		{
-			if (Verbose) Log(Level.Info, string.Format("Restore {0}% Complete", percentCompleteEventArgs.Percent));
+			if (Verbose) Log(Level.Info, string.Format("Restore {0}% Complete", e.Percent));
 		}
 
 		protected void RestoreCompleted(object sender, ServerMessageEventArgs serverMessageEventArgs)

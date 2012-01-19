@@ -12,6 +12,7 @@
     <AssemblyName>SparklesTasks</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,15 +54,14 @@
       <HintPath>..\..\..\..\Dev\nant\bin\NAnt.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssignDBUserTask.cs" />
+    <Compile Include="AttachDatabaseTask.cs" />
     <Compile Include="MoveDirectoryTask.cs" />
+    <Compile Include="OpenURLTask.cs" />
     <Compile Include="RestoreDatabaseTask.cs" />
     <Compile Include="SparklesFunctions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
