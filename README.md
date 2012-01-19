@@ -44,16 +44,14 @@ Example
 	
 ### Tasks
 
-I implemented two tasks, one pretty basic and one a bit more complex.
-
-The first is `movedir` which I implemented due to a bug in the core NAnt tasks when moving directories (https://github.com/nant/nant/issues/11). It takes
+`movedir` was implemented due to a bug in the core NAnt tasks when moving directories (https://github.com/nant/nant/issues/11). It takes
 two parameters, `from` and `to` which are pretty self explanatory.
 
 Example
 
 	<movedir from="/path/of/original/directory" to="/path/of/new/directory" />
 	
-The second task I implemented is `restore-db` which will restore a database backup to a SQL Server instance
+`restore-db` uses a database backup (.bak) to restore it to a SQL Server instance
 
 * `replace` - *Boolean* - Set true to overwrite an existing database on the server with the backup
 * `db-name` - *String*, **Required** - Name of the database to restore to
@@ -63,3 +61,34 @@ The second task I implemented is `restore-db` which will restore a database back
 Example
 
 	<restore-db replace="true" db-name="SuperAwesomeDatabase" backup-path="/path/to/the/backup.bak" />
+
+`attach-db` attaches an existing MDF file to a server instance
+
+* `replace` - *Boolean* - Set true to overwrite an existing database on the server with the backup
+* `db-name` - *String*, **Required** - Name of the database to restore to
+* `mdf-path` - *String*, **Required** - Location of the MDF file
+* `ldf-path` - *String*, **Required** - Location of the LDF file
+* `owner` - *String* - Owner to assign to attached database
+* `server` - *String* - Server instance to use
+
+Example
+
+	<attach-db replace="false" db-name="CoolDatabase" mdf-path="/path/to/db.mdf" ldf-path="/path/to/db.ldf" owner="superuser" />
+
+`db-assign-user` essentially executes the stored procedure `sp_changedbowner` with the specified owner parameter
+
+* `db-name` - *String*, **Required** - Name of the database to assign user to
+* `db-user` - *String*, **Required** - Username to assign to database
+* `server` - *String* - Server to connect to, defaults to localhost
+
+Example
+
+	<db-assign-user db-name="YourDatabase" db-user"superuser" />
+	
+`open-url` is a utiltity task that launches the specified URL
+
+* `url` - *String*, **Required** - Url to open
+
+Example
+
+	<open-url url="http://google.com" />
