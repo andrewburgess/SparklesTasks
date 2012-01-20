@@ -20,7 +20,7 @@ namespace SparklesTasks
 
 		protected override void ExecuteTask()
 		{
-			var cstr = string.Format(@"Data Source={0};Database={1};Integrated Security=SSPI;", ServerName, DBName);
+			var cstr = string.Format(@"Data Source={0};Database={1};Trusted_Connection=Yes;", ServerName, DBName);
 			var conn = new SqlConnection(cstr);
 
 			var cmd = new SqlCommand();

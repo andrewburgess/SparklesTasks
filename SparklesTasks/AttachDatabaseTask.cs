@@ -35,6 +35,12 @@ namespace SparklesTasks
 			server.ConnectionContext.LoginSecure = true;
 			server.ConnectionContext.Connect();
 
+			File.Move(MDFPath, Path.Combine(server.Settings.DefaultFile, DBName + ".mdf"));
+			File.Move(LDFPath, Path.Combine(server.Settings.DefaultFile, DBName + ".ldf"));
+
+			var mdf = Path.Combine(server.Settings.DefaultFile, DBName + ".mdf");
+			var ldf = Path.Combine(server.Settings.DefaultFile, DBName + ".ldf");
+
 			if (!ReplaceDB)
 			{
 				if (server.Databases.Contains(DBName))
@@ -45,7 +51,7 @@ namespace SparklesTasks
 			}
 
 			Log(Level.Info, "Attaching database " + DBName + " to " + ServerName);
-			var sc = new StringCollection {MDFPath, LDFPath};
+			var sc = new StringCollection {mdf, ldf};
 
 			if (string.IsNullOrEmpty(Owner))
 				server.AttachDatabase(DBName, sc);
