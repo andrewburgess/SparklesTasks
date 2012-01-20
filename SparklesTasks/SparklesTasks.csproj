@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="AssignDatabaseUserTask.cs" />
     <Compile Include="AttachDatabaseTask.cs" />
+    <Compile Include="DeleteDatabaseTask.cs" />
     <Compile Include="MoveDirectoryTask.cs" />
     <Compile Include="OpenURLTask.cs" />
     <Compile Include="RestoreDatabaseTask.cs" />
