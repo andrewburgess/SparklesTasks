@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Specialized;
 using System.IO;
 using Microsoft.SqlServer.Management.Common;
@@ -48,6 +49,24 @@ namespace SparklesTasks
 					Log(Level.Info, DBName + " exists on " + ServerName + " and will not be replaced");
 					return;
 				}
+			}
+
+			if (server.Databases.Contains(DBName))
+			{
+				Log(Level.Info, "Removing existing database and replacing it");
+				try
+				{
+					server.Databases[DBName].Drop();
+				}
+				catch (Exception e)
+				{
+					if (Verbose)
+						Log(Level.Info, "Killing connections to " + DBName);
+
+					server.KillAllProcesses(DBName);
+					server.Databases[DBName].Drop();
+				}
+				Log(Level.Info, "Database removed");
 			}
 
 			Log(Level.Info, "Attaching database " + DBName + " to " + ServerName);
