@@ -14,7 +14,7 @@ namespace SparklesTasks
 		[TaskAttribute("db-user", Required = true)]
 		public string DBUser { get; set; }
 
-		private string serverName = @"localhost";
+		private string serverName = @"localhost\sql2008";
 		[TaskAttribute("server")]
 		public string ServerName { get { return serverName; } set { serverName = value; } }
 
