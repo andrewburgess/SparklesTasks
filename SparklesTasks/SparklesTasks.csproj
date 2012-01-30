@@ -61,11 +61,13 @@
     <Compile Include="AssignDatabaseUserTask.cs" />
     <Compile Include="AttachDatabaseTask.cs" />
     <Compile Include="DeleteDatabaseTask.cs" />
+    <Compile Include="InstallPackagesTask.cs" />
     <Compile Include="MoveDirectoryTask.cs" />
     <Compile Include="OpenURLTask.cs" />
     <Compile Include="RestoreDatabaseTask.cs" />
     <Compile Include="SparklesFunctions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WarmUpSiteTask.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
